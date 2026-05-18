@@ -21,17 +21,22 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PT_Fruit_Tree_Opaque_mat
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: 4800000, guid: 270965b004462ae41bd125bc783c0fa6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ValidKeywords:
+  - _CUSTOMWIND_ON
+  m_InvalidKeywords:
+  - _ANIMATEDECALEMISSIONONOFF_ON
+  - _DECALEMISSIONONOFF_ON
+  - _SNOWNOISEONOFF_ON
+  - _TRANSLUCENCYONOFF_ON
+  - _WORLDOBJECTGRADIENT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
+  stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -54,6 +59,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DecalsTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -63,6 +72,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -90,7 +103,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TopProjectionTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord2:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -109,8 +130,11 @@ Material:
     m_Ints: []
     m_Floats:
     - PixelSnap: 0
+    - _ANIMATEDECALEMISSIONONOFF: 1
+    - _ANIMATEOREEMISSIONONOFF: 0
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
+    - _AlphaCutoff: 0.5
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
@@ -122,21 +146,31 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DECALEMISSIONONOFF: 1
+    - _DECALSONOFF: 0
+    - _DETAILTEXTUREONOFF: 0
+    - _DecalEmissionIntensity: 4
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DetailTextureTiling: 0.5
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnableExternalAlpha: 0
     - _EnvironmentReflections: 1
+    - _GRADIENTONOFF: 0
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _Gradient: 1
     - _GradientPower: 1
+    - _LeavesThickness: 0.5
     - _Metallic: 0
     - _Mode: 0
+    - _OREEMISSIONONOFF: 0
     - _OcclusionStrength: 1
+    - _OreEmissionIntensity: 1
     - _Parallax: 0.02
+    - _QueueControl: -1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SNOWONOFF: 0
@@ -145,10 +179,24 @@ Material:
     - _SnowAmount: 1
     - _SnowCoverage: 0.45
     - _SnowFade: 0.83
+    - _SnowGradient: 0.83
+    - _SnowNoiseContrast: 0.002
+    - _SnowNoiseOnOff: 1
+    - _SnowNoiseScale: 87.23351
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
+    - _TOPPROJECTIONONOFF: 0
+    - _TRANSLUCENCYONOFF: 1
+    - _TopProjectionTextureCoverage: 1
+    - _TopProjectionTextureTiling: 0.5
+    - _TransAmbient: 0.1
+    - _TransDirect: 0.9
+    - _TransNormal: 0.5
+    - _TransScattering: 2
+    - _TransShadow: 0.5
+    - _TransStrength: 1
     - _UVSec: 0
     - _WINDMASKONOFF: 0
     - _WindDensity: 0.2
@@ -158,17 +206,24 @@ Material:
     - _WindStrength: 0.3
     - _WindStrength1: 0.3
     - _WorkflowMode: 1
+    - _WorldObjectGradient: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DecakEmissionColor: {r: 1, g: 0.9248579, b: 0, a: 0}
+    - _DecalsColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _GroundColor: {r: 0.08490568, g: 0.05234205, b: 0.04846032, a: 1}
+    - _OreColor: {r: 1, g: 0.9248579, b: 0, a: 0}
+    - _OreEmissionColor: {r: 1, g: 0.9248579, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SnowDirection: {r: 0.1, g: 1, b: 0.1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TopColor: {r: 0.4811321, g: 0.4036026, b: 0.2382966, a: 1}
+    - _Vector1: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
