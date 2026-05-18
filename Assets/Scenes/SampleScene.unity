@@ -545,6 +545,9 @@ MonoBehaviour:
   jumpForce: 8
   liftDuration: 0.1
   liftTimer: 0
+  myAnim: {fileID: 475474541}
+  isWalking: 0
+  isRunning: 0
 --- !u!65 &475474539
 BoxCollider:
   m_ObjectHideFlags: 0

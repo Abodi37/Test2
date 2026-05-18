@@ -28,6 +28,11 @@ public class PlayerMovements : MonoBehaviour
     public float liftDuration = 0.1f;
     public float liftTimer; 
 
+    [Header("Animation")]
+    public Animator myAnim;
+    public bool isWalking;
+    public bool isRunning;
+
     void Update()
     {
         float Horizontal = Input.GetAxis("Horizontal");
@@ -45,6 +50,8 @@ public class PlayerMovements : MonoBehaviour
             move *= currentSpeed;
             stamina -= drainRate * Time.deltaTime;
             if (stamina <= 0) canSprint = false;
+            isRunning = true;
+            isWalking = false;
         }
         else
         {
