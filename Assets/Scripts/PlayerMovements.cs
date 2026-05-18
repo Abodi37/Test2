@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
     public Transform cameraTransform; // Drag your Main Camera here
     public ParticleSystem runParticles;
+    public GameObject winPanel;
 
     private Animator anim;
     private int speedHash;
@@ -95,6 +96,19 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             if (runParticles.isPlaying) runParticles.Stop();
+        }
+
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.CompareTag("WinZone"))
+        {
+            if (winPanel != null)
+            {
+                winPanel.SetActive(true);
+                Time.timeScale = 0f;
+            }
         }
     }
 }
