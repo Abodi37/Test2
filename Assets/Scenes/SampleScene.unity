@@ -527,27 +527,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f3609c7448c4490be8f5f50768caed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovements
-  myPlayer: {fileID: 475474540}
-  speed: 4
-  currentSpeed: 8
-  gravity: -20
-  stamina: 100
-  maxStamina: 100
-  drainRate: 20
-  refillRate: 15
-  canSprint: 1
-  grounded: 0
-  velocity: {x: 0, y: 0, z: 0}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 0
-  groundDistance: 1.1
-  jumpForce: 8
-  liftDuration: 0.1
-  liftTimer: 0
-  myAnim: {fileID: 475474541}
-  isWalking: 0
-  isRunning: 0
+  walkSpeed: 3
+  runSpeed: 7
 --- !u!65 &475474539
 BoxCollider:
   m_ObjectHideFlags: 0

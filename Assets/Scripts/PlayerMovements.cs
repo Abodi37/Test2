@@ -1,87 +1,49 @@
 using UnityEngine;
 
-public class PlayerMovements : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
+    public float walkSpeed = 2f;
+    public float runSpeed = 5f;
+    
+    private Animator anim;
+    private int speedHash;
 
-    public CharacterController myPlayer;
-
-    [Header("Movements")]
-    public float speed = 4f; 
-     public float currentSpeed = 8f;
-     public float gravity = -20f;
-
-     [Header("StaminaLogic")]
-    public float stamina = 100f;
-    public float maxStamina = 100f; 
-    public float drainRate = 20f; 
-    public float refillRate = 15f;
-    public bool canSprint = true;
-
-     [Header("CheckGround")]
-    public bool grounded;
-    public Vector3 velocity;
-    public LayerMask groundMask;
-    public float groundDistance = 1.1f;
-
-    [Header("Smooth Jump")]
-    public float jumpForce = 8f;
-    public float liftDuration = 0.1f;
-    public float liftTimer; 
-
-    [Header("Animation")]
-    public Animator myAnim;
-    public bool isWalking;
-    public bool isRunning;
+    void Start()
+    {
+        // Cache the animator component and parameter ID for performance
+        anim = GetComponent<Animator>();
+        speedHash = Animator.StringToHash("Speed");
+    }
 
     void Update()
     {
-        float Horizontal = Input.GetAxis("Horizontal");
-        float Vertical = Input.GetAxis("Vertical");
+        // Get WASD / Arrow Key inputs (-1 to 1)
+        float moveX = Input.GetAxis("Horizontal");
+        float moveZ = Input.GetAxis("Vertical");
 
-        Vector3 move = (transform.right * Horizontal) + (transform.forward * Vertical); 
+        // Calculate movement direction vector
+        Vector3 moveDir = new Vector3(moveX, 0f, moveZ).normalized;
 
-        grounded = Physics.Raycast(transform.position, Vector3.down, groundDistance, groundMask);
-        Debug.DrawRay(transform.position, Vector3.down * groundDistance, grounded ? Color.green : Color.red);
+        // Determine if player is moving and if they are holding Left Shift to run
+        bool isMoving = moveDir.magnitude > 0.1f;
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
 
-        bool isTryingToSprint = Input.GetKey(KeyCode.LeftShift) && Vertical > 0; 
+        // Calculate current animation target speed value
+        float currentAnimSpeed = 0f;
 
-        if (isTryingToSprint && canSprint && stamina > 0)
+        if (isMoving)
         {
-            move *= currentSpeed;
-            stamina -= drainRate * Time.deltaTime;
-            if (stamina <= 0) canSprint = false;
-            isRunning = true;
-            isWalking = false;
-        }
-        else
-        {
-            move *= speed; 
-            if (stamina < maxStamina)
-                stamina += refillRate * Time.deltaTime;
-
-            if (stamina >= 100f) canSprint = true;
-        }
-
-        if (grounded && velocity.y < 0)
-        {
-            velocity.y = -1f;
+            currentAnimSpeed = isRunning ? 2f : 1f;
+            
+            // Move the actual GameObject
+            float currentMoveSpeed = isRunning ? runSpeed : walkSpeed;
+            transform.Translate(moveDir * currentMoveSpeed * Time.deltaTime, Space.World);
+            
+            // Rotate player to face movement direction
+            transform.forward = moveDir;
         }
 
-        if (Input.GetButtonDown("Jump") && grounded == true)
-        {
-            liftTimer = liftDuration;
-        }
-
-        if (liftTimer > 0)
-        {
-            velocity.y += jumpForce * (liftTimer / liftDuration) * Time.deltaTime * 10f;
-            liftTimer -= Time.deltaTime;
-        }
-
-        velocity.y += gravity * Time.deltaTime;
-        myPlayer.Move(velocity * Time.deltaTime);
-       
-        myPlayer.Move(move * Time.deltaTime);
+        // Send the speed value directly to the Blend Tree parameter
+        anim.SetFloat(speedHash, currentAnimSpeed, 0.1f, Time.deltaTime);
     }
 }
-
